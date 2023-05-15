@@ -1,0 +1,61 @@
+html {
+    background-image: url('/assets/bg1.jpg');
+    background-size: cover;
+    padding: 10vh;
+}
+
+body {
+    background-color: #DCEDC8 !important;
+    color: #6b8e23 !important;
+    border-radius: 25px;
+    min-height: 80vh;
+}
+
+.nav-pills > li.nav-item {
+    margin-left: 5px;
+}
+
+.nav-pills > li.nav-item > a {
+    background-color: transparent !important;
+    color: olivedrab;
+}
+
+.nav-pills > li.nav-item > a.active {
+    color:olivedrab;
+    border: olivedrab dashed 2px;
+    font-weight: bolder;
+}
+
+.nav-pills > li.nav-item > a:hover {
+    color:white;
+}
+
+footer, footer a {
+    color: black;
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: white;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.search-btn {
+    border-color: olivedrab !important;
+    color: olivedrab !important;
+}
+
+.search-btn:hover {
+    background-color: olivedrab !important;
+    color: white !important;
+}
+
+.search-input:focus {
+    box-shadow: none !important;
+    border-color: olivedrab !important;
+}
