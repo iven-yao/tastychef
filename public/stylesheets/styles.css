@@ -11,22 +11,26 @@ body {
     min-height: 80vh;
 }
 
-.nav-pills > li.nav-item {
+.nav-item {
+    text-align: right;
+}
+
+.navbar-nav > li.nav-item {
     margin-left: 5px;
 }
 
-.nav-pills > li.nav-item > a {
+.navbar-nav > li.nav-item > a {
     background-color: transparent !important;
     color: olivedrab;
 }
 
-.nav-pills > li.nav-item > a.active {
+.navbar-nav > li.nav-item > a.active {
     color:olivedrab;
-    border: olivedrab dashed 2px;
+    text-decoration: underline;
     font-weight: bolder;
 }
 
-.nav-pills > li.nav-item > a:hover {
+.navbar-nav > li.nav-item > a:hover {
     color:white;
 }
 
