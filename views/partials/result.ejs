@@ -1,0 +1,10 @@
+<% results.forEach(function(result) {%>
+    <div class="col">
+        <div class="card">
+            <img src=<%= result.thumbnail_url %> class="card-img-top" alt=<%= result.thumbnail_alt_text%> >
+            <div class="card-body">
+                <span class="card-title"><%= result.name %></span>
+            </div>
+        </div>
+    </div>
+<%});%>
