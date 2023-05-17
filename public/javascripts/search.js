@@ -14,15 +14,11 @@ jQuery(function(){
             console.log(err);
         })
     });
+
+    $("")
 });
 
 var showResults = function(result) {
-    //display result in innerHTML
     var div = document.getElementById("search_result");
-    // var str = "";
-    // result.forEach((ele) => {
-    //     console.log(ele.name);
-    //     str += ele.name;
-    // });
     div.innerHTML = result;
 }

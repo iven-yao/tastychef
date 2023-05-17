@@ -1,9 +1,46 @@
 <% results.forEach(function(result) {%>
     <div class="col">
-        <div class="card">
-            <img src=<%= result.thumbnail_url %> class="card-img-top" alt=<%= result.thumbnail_alt_text%> >
+        <div class="card clickable" data-bs-toggle="modal" data-bs-target=<%= '#meal'+result.idMeal%> >
+            <img src=<%= result.strMealThumb %> class="card-img-top px-3 pt-3">
             <div class="card-body">
-                <span class="card-title"><%= result.name %></span>
+                <span class="card-title"><%= result.strMeal %></span>
+            </div>
+            <div class="modal fade" id=<%= 'meal'+result.idMeal%> tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                        <span class="fw-bold">
+                            <%= result.strMeal %>
+                        </span>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12 col-md-3">
+                                    <img src=<%= result.strMealThumb %> />
+                                </div>
+                            
+                                <div class="col-12 col-md-9">
+                                    <span class="fw-bold">Instructions:</span>
+                                    <%  let count = 0;
+                                        const split = result.strInstructions.split("\r\n");
+                                        split.forEach(function(instruction){
+                                            if(instruction.length != 0) {
+                                                count++;
+                                    %>
+                                        <div class="row mb-3">
+                                            <span class=""><%= count+". "+ instruction %></span>
+                                        </div>
+                                    <% }})%>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
             </div>
         </div>
     </div>
