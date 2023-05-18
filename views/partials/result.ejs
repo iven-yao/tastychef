@@ -3,7 +3,24 @@
         No Result :(
     </div>
 <%} else {%>
-<% results.forEach(function(result) {%>
+<% 
+const page = Math.ceil(results.length/6);%>
+<div class="row g-1 px-5 pb-5 justify-content-center" id="page1">
+<%
+var currPage = 1;
+var currPageItemCount = 0;
+results.forEach(function(result) {
+    if(currPageItemCount == 6) {
+        currPage++;
+        currPageItemCount = 0;
+%>
+    </div>
+    <div class="row g-1 px-5 pb-5 justify-content-center visually-hidden" id=<%="page"+currPage%> >
+
+<%
+    }    
+    currPageItemCount++;
+%>
     <div class="col-12 col-md-6 col-lg-4">
         <div class="card clickable" id=<%= "card_"+result.idMeal %> data-bs-toggle="modal" data-bs-target=<%= '#meal_'+result.idMeal%> >
             <img src=<%= result.strMealThumb %> class="card-img-top px-3 pt-3">
@@ -39,4 +56,19 @@
         </div>
     </div>
 <%});%>
+</div>
+<!-- pagination -->
+<div class="d-flex justify-content-center pagination-container">
+    <a class="pagination-button" id="prev-button" title="Previous page" aria-label="Previous page">
+        &lt;
+    </a>
+    
+    <% for(var i = 1; i <= page; i++) {%>
+    <a class="pagination-button" id=<%="toPage_"+i%>><%= i%></a>
+    <%}%>
+    
+    <a class="pagination-button" id="next-button" title="Next page" aria-label="Next page">
+        &gt;
+    </a>
+</div>
 <%}%>

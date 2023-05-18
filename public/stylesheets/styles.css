@@ -1,3 +1,7 @@
+:root {
+    --main-text-color: #6b8e23;
+  }
+
 html {
     background-image: url('/assets/bg1.jpg');
     background-size: cover;
@@ -8,7 +12,7 @@ html {
 
 body {
     background-color: #DCEDC8 !important;
-    color: #6b8e23 !important;
+    color: var(--main-text-color) !important;
     border-radius: 25px;
     min-height: 80vh;
 }
@@ -23,11 +27,11 @@ body {
 
 .navbar-nav > li.nav-item > a {
     background-color: transparent !important;
-    color: olivedrab;
+    color: var(--main-text-color);
 }
 
 .navbar-nav > li.nav-item > a.active {
-    color:olivedrab;
+    color:var(--main-text-color);
     text-decoration: underline;
     font-weight: bolder;
 }
@@ -52,18 +56,18 @@ footer a:hover {
 }
 
 .search-btn {
-    border-color: olivedrab !important;
-    color: olivedrab !important;
+    border-color: var(--main-text-color) !important;
+    color: var(--main-text-color) !important;
 }
 
 .search-btn:hover {
-    background-color: olivedrab !important;
+    background-color: var(--main-text-color) !important;
     color: white !important;
 }
 
 .search-input:focus {
     box-shadow: none !important;
-    border-color: olivedrab !important;
+    border-color: var(--main-text-color) !important;
 }
 
 .clickable {
@@ -96,4 +100,18 @@ footer a:hover {
 
 .bold-icon {
     -webkit-text-stroke: 1px;
+}
+
+.pagination-button {
+    text-decoration: none;
+    color: var(--main-text-color);
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+}
+
+.pagination-button:not(.disable):hover {
+    font-weight: bolder;
+    text-decoration: none;
+    background-color: var(--main-text-color);
+    color: white;
 }

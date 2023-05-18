@@ -32,7 +32,6 @@ let getRandomRecipe = async () => {
     const res = await axios.get(
       "https://www.themealdb.com/api/json/v1/1/random.php"
     );
-    console.log(res.data);
     return res.data;
   } catch (err) {
     console.log(err);
@@ -47,7 +46,30 @@ let getRecipeDetail = async (id) => {
     const res = await axios.get(
       "https://www.themealdb.com/api/json/v1/1/lookup.php?"+ param
     );
-    // console.log(res.data);
+    return res.data;
+  } catch (err) {
+    console.log(err);
+    return err;
+  }
+}
+
+let getCategoryList = async () => {
+  try{
+    const res = await axios.get(
+      "https://www.themealdb.com/api/json/v1/1/list.php?c=list"
+    );
+    return res.data;
+  } catch (err) {
+    console.log(err);
+    return err;
+  }
+}
+
+let getCountryList = async () => {
+  try{
+    const res = await axios.get(
+      "https://www.themealdb.com/api/json/v1/1/list.php?a=list"
+    );
     return res.data;
   } catch (err) {
     console.log(err);
@@ -125,6 +147,5 @@ app.get('/api/random', async (req, res) => {
 // get detail
 app.get('/api/detail', async(req, res) => {
   let data = await getRecipeDetail(req.query.id);
-  // console.log(data.meals[0]);
   res.render('partials/detail', {"detail":data.meals[0]});
 });
