@@ -7,7 +7,7 @@ recipe look up app powered by TheMealDB API
 - add an .env file to the root directory
 - inside the .env file add following:
   - PORT: {PORT} // the port number this app should listen to
-- run the server `node app.js`
+- run the application `node app.js`
 - try in your browser with http://localhost:{PORT}
 
 Let me know what you think :)
