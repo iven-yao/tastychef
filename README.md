@@ -1,14 +1,12 @@
 # TastyChef
-recipe look up app powered by Tasty API
+recipe look up app powered by TheMealDB API
 
 # Install
 - clone this repo `git clone https://github.com/iven-yao/tastychef.git`
 - install packages through `npm install package.json`
 - add an .env file to the root directory
 - inside the .env file add following:
-  1. PORT: {PORT} // the port number this app should listen to
-  2. API_KEY: {apiKey} // obtained through signing up @ https://rapidapi.com/apidojo/api/tasty
-  3. API_HOST: tasty.p.rapidapi.com
+  - PORT: {PORT} // the port number this app should listen to
 - run the server `node app.js`
 - try in your browser with http://localhost:{PORT}
 
