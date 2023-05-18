@@ -1,47 +1,42 @@
+<% if(results == null || results.length == 0) {%>
+    <div class="col text-center">
+        No Result :(
+    </div>
+<%} else {%>
 <% results.forEach(function(result) {%>
-    <div class="col">
-        <div class="card clickable" data-bs-toggle="modal" data-bs-target=<%= '#meal'+result.idMeal%> >
+    <div class="col-12 col-md-6 col-lg-4">
+        <div class="card clickable" id=<%= "card_"+result.idMeal %> data-bs-toggle="modal" data-bs-target=<%= '#meal_'+result.idMeal%> >
             <img src=<%= result.strMealThumb %> class="card-img-top px-3 pt-3">
             <div class="card-body">
                 <span class="card-title"><%= result.strMeal %></span>
             </div>
-            <div class="modal fade" id=<%= 'meal'+result.idMeal%> tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal fade" id=<%= 'meal_'+result.idMeal%> tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                        <span class="fw-bold">
-                            <%= result.strMeal %>
-                        </span>
-                    </div>
-                    <div class="modal-body">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-12 col-md-3">
-                                    <img src=<%= result.strMealThumb %> />
-                                </div>
-                            
-                                <div class="col-12 col-md-9">
-                                    <span class="fw-bold">Instructions:</span>
-                                    <%  let count = 0;
-                                        const split = result.strInstructions.split("\r\n");
-                                        split.forEach(function(instruction){
-                                            if(instruction.length != 0) {
-                                                count++;
-                                    %>
-                                        <div class="row mb-3">
-                                            <span class=""><%= count+". "+ instruction %></span>
-                                        </div>
-                                    <% }})%>
+                    <div class="modal-content" id=<%= 'content'+result.idMeal%>>
+                        <div class="modal-header">
+                            <span class="fw-bold">
+                                <%= result.strMeal %>
+                            </span>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container">
+                                <div class="row border-bottom pb-3 mb-3">
+                                    <div class="col-12 col-md-5">
+                                        <img src=<%= result.strMealThumb %> />
+                                    </div>
+                                    <div class="col-12 col-md-7">
+                                        <span class="fw-bold">Ingredients:</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-success" data-bs-dismiss="modal">Close</button>
+                        </div>
                     </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    </div>
-                  </div>
                 </div>
             </div>
         </div>
     </div>
 <%});%>
+<%}%>

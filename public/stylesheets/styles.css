@@ -90,5 +90,10 @@ footer a:hover {
 }
 
 .modal-body p {
-    word-wrap: break-word;
+    /* word-wrap: break-word; */
+    margin-bottom: 0;
+}
+
+.bold-icon {
+    -webkit-text-stroke: 1px;
 }

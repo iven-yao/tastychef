@@ -1,0 +1,58 @@
+<div class="modal-header">
+    <span class="fw-bold">
+        <%= detail.strMeal %>
+    </span>
+</div>
+<div class="modal-body">
+    <div class="container">
+        <div class="row border-bottom pb-3 mb-3">
+            <div class="col-12 col-md-5">
+                <img src=<%= detail.strMealThumb %> />
+            </div>
+            <div class="col-12 col-md-7">
+                <span class="fw-bold">Ingredients:</span>
+                <%  let ingStr = 'strIngredient';
+                    let meaStr = 'strMeasure';
+                    for(var i = 1; i <= 20; i++) {
+                        const ing = detail[ingStr+i];
+                        const mea = detail[meaStr+i];
+                        if(ing == null || ing.length == 0) { break; }
+                %>
+                    <div class="d-flex justify-content-between">
+                        <p class="flex-grow-1"><%= ing %></p>
+                        <p class="text-end"><%= mea %></p>
+                    </div>
+                <% }%>
+            </div>
+        </div>
+        
+        <% if(detail.strYoutube.length != 0) {%>
+        <div class="row border-bottom pb-3 mb-3">
+            <div class="col">
+                <div class="ratio ratio-16x9">
+                    <iframe src=<%=detail.strYoutube.replace('watch?v=','embed/') %> allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+        <%}%>
+
+        <div class="row">
+            <div class="col">
+                <span class="fw-bold">Instructions:</span>
+                <%  let count = 0;
+                    const split = detail.strInstructions.split("\r\n");
+                    split.forEach(function(instruction){
+                        if(instruction.length != 0) {
+                            count++;
+                %>
+                    <div class="row mb-3">
+                        <span class=""><%= count+". "+ instruction %></span>
+                    </div>
+                <% }})%>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal">Close</button>
+</div>
