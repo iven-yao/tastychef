@@ -109,9 +109,19 @@ footer a:hover {
     border-radius: 0.25rem;
 }
 
+.pagination-button.disable {
+    color: lightgray;
+}
+
+.pagination-button.active {
+    text-decoration: underline;
+    font-weight: bold;
+}
+
 .pagination-button:not(.disable):hover {
     font-weight: bolder;
     text-decoration: none;
     background-color: var(--main-text-color);
     color: white;
+    cursor: pointer;
 }

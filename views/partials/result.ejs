@@ -5,7 +5,7 @@
 <%} else {%>
 <% 
 const page = Math.ceil(results.length/6);%>
-<div class="row g-1 px-5 pb-5 justify-content-center" id="page1">
+<div class="row g-1 px-5 pb-5 justify-content-center pages" id="page1">
 <%
 var currPage = 1;
 var currPageItemCount = 0;
@@ -15,7 +15,7 @@ results.forEach(function(result) {
         currPageItemCount = 0;
 %>
     </div>
-    <div class="row g-1 px-5 pb-5 justify-content-center visually-hidden" id=<%="page"+currPage%> >
+    <div class="row g-1 px-5 pb-5 justify-content-center visually-hidden pages" id=<%="page"+currPage%> >
 
 <%
     }    
@@ -64,7 +64,7 @@ results.forEach(function(result) {
     </a>
     
     <% for(var i = 1; i <= page; i++) {%>
-    <a class="pagination-button" id=<%="toPage_"+i%>><%= i%></a>
+    <a class="pagination-button pagination-numeric" id=<%="toPage_"+i%>><%= i%></a>
     <%}%>
     
     <a class="pagination-button" id="next-button" title="Next page" aria-label="Next page">

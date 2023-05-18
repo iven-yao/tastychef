@@ -55,14 +55,71 @@ var showResultSpinner = function() {
     div.innerHTML = spinner;
 }
 
+var currentPage = 1;
+var maxPage = 1;
 var showResults = function(result) {
     var div = document.getElementById("search_result");
     div.innerHTML = result;
+
+    setMaxPage();
+    setCurrentPage(1);
+    $(".pagination-button").on("click", function(event) {
+        var id = $(this).attr("id");
+        if(id === "prev-button") {
+            setCurrentPage(-1+parseInt(currentPage));
+        } else if(id === "next-button") {
+            setCurrentPage(1+parseInt(currentPage));
+        } else {
+            var toPage = id.split('_')[1];
+            setCurrentPage(parseInt(toPage));
+        }
+    });
+}
+
+var setMaxPage = function() {
+    var anchors = document.getElementsByClassName("pagination-numeric");
+    maxPage = anchors.length;
+}
+
+var setCurrentPage = function(page) {
+    currentPage = page;
+    // console.log(currentPage);
+    // show current page
+    var divs = document.getElementsByClassName("pages");
+    for(var i = 0; i < divs.length; i++) {
+        divs[i].classList.add("visually-hidden");
+    }
+    var div = document.getElementById("page"+currentPage);
+    div.classList.remove("visually-hidden");
+
+    // make current page button active
+    var anchors = document.getElementsByClassName("pagination-numeric");
+    for(var i = 0; i < anchors.length; i++) {
+        anchors[i].classList.remove("active");
+    }
+    var anchor = document.getElementById("toPage_"+currentPage);
+    anchor.classList.add("active");
+
+    // check prev disable status
+    var prev = document.getElementById("prev-button");
+    if(currentPage == 1) {
+        prev.classList.add("disable");
+    } else {
+        prev.classList.remove("disable");
+    }
+
+    // check next disable status
+    var next = document.getElementById("next-button");
+    if(currentPage == maxPage) {
+        next.classList.add("disable");
+    } else {
+        next.classList.remove("disable");
+    }
 }
 
 var changeRandomText = function() {
     var span = document.getElementById("random_txt");
-    span.innerHTML = "Get another one ";
+    span.innerText = "Get another one ";
 }
 
 var showDetail = function(result, id) {
