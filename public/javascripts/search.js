@@ -65,6 +65,9 @@ var showResults = function(result) {
     setCurrentPage(1);
     $(".pagination-button").on("click", function(event) {
         var id = $(this).attr("id");
+        if($(this).hasClass("disable")) {
+            return;
+        }
         if(id === "prev-button") {
             setCurrentPage(-1+parseInt(currentPage));
         } else if(id === "next-button") {
