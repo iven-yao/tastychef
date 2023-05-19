@@ -45,9 +45,39 @@ jQuery(function(){
         })
     });
 
+    // for /favorite
     $(window).on('hidden.bs.modal', updateFavPage);
-
     updateFavPage();
+
+    // for /country
+    $(".area-btn").on('click', function(event) {
+        showResultSpinner();
+        var area = $(this).attr('id');
+
+        $.ajax({
+            url: "/api/area?a="+area,
+            type: "GET"
+        }).done(function(result) {
+            showResults(result, "search_result");
+        }).fail(function(err) {
+            console.log(err);
+        })
+    });
+
+    // for /category
+    $(".cate-btn").on('click', function(event) {
+        showResultSpinner();
+        var cat = $(this).attr('id');
+
+        $.ajax({
+            url: "/api/cat?c="+cat,
+            type: "GET"
+        }).done(function(result) {
+            showResults(result, "search_result");
+        }).fail(function(err) {
+            console.log(err);
+        })
+    });
 });
 
 let spinner = '<div class="spinner-border" role="status">    <span class="visually-hidden">Loading...</span>   </div>';

@@ -125,3 +125,7 @@ footer a:hover {
     color: white;
     cursor: pointer;
 }
+
+#contact-section a {
+    color: var(--main-text-color);
+}

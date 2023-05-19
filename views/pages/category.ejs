@@ -3,13 +3,13 @@
   <!-- pic -->
   <div class="row justify-content-center">
     <div class="col col-8 col-sm-6 col-md-4 mb-3">
-      <img src="/assets/apple.png" width="40%" class="center">
+      <img src="/assets/cabbage.png" width="40%" class="center">
     </div>
   </div>
   <!-- btns -->
   <div class="d-flex flex-wrap justify-content-center mb-3 pb-3 px-3 border-bottom">
-    <% countries.forEach(function(country) {%>
-      <button type="button" class="btn btn-outline-success m-1 area-btn" id=<%=country.strArea%>><%= country.strArea%></button>
+    <% categories.forEach(function(category) {%>
+      <button type="button" class="btn btn-outline-success m-1 cate-btn" id=<%=category.strCategory%>><%= category.strCategory%></button>
     <%})%>
   </div>
   <!-- result -->

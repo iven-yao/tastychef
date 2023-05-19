@@ -52,10 +52,42 @@ let getRecipeDetail = async (id) => {
   }
 }
 
+let categoryList = null;
 let getCategoryList = async () => {
+  if(categoryList != null) return categoryList;
   try{
     const res = await axios.get(
       "https://www.themealdb.com/api/json/v1/1/list.php?c=list"
+    );
+    categoryList = res.data;
+    return res.data;
+  } catch (err) {
+    console.log(err);
+    return err;
+  }
+}
+
+let countryList = null;
+let getCountryList = async () => {
+  if(countryList != null) return countryList;
+  try{
+    const res = await axios.get(
+      "https://www.themealdb.com/api/json/v1/1/list.php?a=list"
+    );
+    countryList = res.data;
+    return res.data;
+  } catch (err) {
+    console.log(err);
+    return err;
+  }
+}
+
+let getAreaRecipes = async (area) => {
+  let payload = {a:area};
+  const param = new url.URLSearchParams(payload);
+  try{
+    const res = await axios.get(
+      "https://www.themealdb.com/api/json/v1/1/filter.php?"+param
     );
     return res.data;
   } catch (err) {
@@ -64,10 +96,12 @@ let getCategoryList = async () => {
   }
 }
 
-let getCountryList = async () => {
+let getCategoryRecipes = async (cat) => {
+  let payload = {c:cat};
+  const param = new url.URLSearchParams(payload);
   try{
     const res = await axios.get(
-      "https://www.themealdb.com/api/json/v1/1/list.php?a=list"
+      "https://www.themealdb.com/api/json/v1/1/filter.php?"+param
     );
     return res.data;
   } catch (err) {
@@ -75,6 +109,13 @@ let getCountryList = async () => {
     return err;
   }
 }
+
+let init = () => {
+  getCountryList();
+  getCategoryList();
+}
+
+init();
 
 app.get(['/','/search'], (req, res) => {
   res.render('pages/index');
@@ -84,8 +125,12 @@ app.get('/favorite', (req, res) => {
   res.render('pages/favorite');
 });
 
-app.get('/country', (req, res) => {
-  res.render('pages/country');
+app.get('/country', async (req, res) => {
+  res.render('pages/country', {"countries": countryList.meals});
+});
+
+app.get('/category', async (req, res) => {
+  res.render('pages/category', {"categories": categoryList.meals});
 });
 
 app.get('/about', (req, res) => {
@@ -108,6 +153,18 @@ app.get('/api/random', async (req, res) => {
 app.get('/api/detail', async(req, res) => {
   let data = await getRecipeDetail(req.query.id);
   res.render('partials/detail', {"detail":data.meals[0]});
+});
+
+// get area recipes
+app.get('/api/area', async(req, res) => {
+  let data = await getAreaRecipes(req.query.a);
+  res.render('partials/result', {"results": data.meals, "random": false});
+});
+
+// get category recipes
+app.get('/api/cat', async(req, res) => {
+  let data = await getCategoryRecipes(req.query.c);
+  res.render('partials/result', {"results": data.meals, "random": false});
 });
 
 app.get('/favData', (req, res) => {
