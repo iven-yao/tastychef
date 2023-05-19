@@ -1,13 +1,14 @@
-<div class="modal-header">
-    <span class="fw-bold">
+<div class="modal-header d-flex justify-content-between">
+    <span class="fw-bold" id=<%="name_"+detail.idMeal%>>
         <%= detail.strMeal %>
     </span>
+    <i class="bi bi-heart text-danger fav-btn clickable" id=<%="fav_"+detail.idMeal%>></i>
 </div>
 <div class="modal-body">
     <div class="container">
         <div class="row border-bottom pb-3 mb-3">
             <div class="col-12 col-md-5">
-                <img src=<%= detail.strMealThumb %> />
+                <img id=<%="img_"+detail.idMeal%> src=<%= detail.strMealThumb %> />
             </div>
             <div class="col-12 col-md-7">
                 <span class="fw-bold">Ingredients:</span>

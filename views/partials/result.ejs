@@ -1,6 +1,6 @@
 <% if(results == null || results.length == 0) {%>
     <div class="col text-center">
-        No Result :(
+        No Result
     </div>
 <%} else {%>
 <% 
@@ -27,29 +27,29 @@ results.forEach(function(result) {
             <div class="card-body">
                 <span class="card-title"><%= result.strMeal %></span>
             </div>
-            <div class="modal fade" id=<%= 'meal_'+result.idMeal%> tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" role="document">
-                    <div class="modal-content" id=<%= 'content'+result.idMeal%>>
-                        <div class="modal-header">
-                            <span class="fw-bold">
-                                <%= result.strMeal %>
-                            </span>
-                        </div>
-                        <div class="modal-body">
-                            <div class="container">
-                                <div class="row border-bottom pb-3 mb-3">
-                                    <div class="col-12 col-md-5">
-                                        <img src=<%= result.strMealThumb %> />
-                                    </div>
-                                    <div class="col-12 col-md-7">
-                                        <span class="fw-bold">Ingredients:</span>
-                                    </div>
+        </div>
+        <div class="modal fade" id=<%= 'meal_'+result.idMeal%> tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" role="document">
+                <div class="modal-content" id=<%= 'content'+result.idMeal%>>
+                    <div class="modal-header">
+                        <span class="fw-bold">
+                            <%= result.strMeal %>
+                        </span>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container">
+                            <div class="row border-bottom pb-3 mb-3">
+                                <div class="col-12 col-md-5">
+                                    <img src=<%= result.strMealThumb %> />
+                                </div>
+                                <div class="col-12 col-md-7">
+                                    <span class="fw-bold">Ingredients:</span>
                                 </div>
                             </div>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-success" data-bs-dismiss="modal">Close</button>
-                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" >Close</button>
                     </div>
                 </div>
             </div>
@@ -58,7 +58,7 @@ results.forEach(function(result) {
 <%});%>
 </div>
 <!-- pagination -->
-<div class="d-flex justify-content-center pagination-container">
+<div class="d-flex justify-content-center pagination-container" id="pagination">
     <a class="pagination-button" id="prev-button" title="Previous page" aria-label="Previous page">
         &lt;
     </a>

@@ -1,3 +1,5 @@
+const localFav = "fav";
+
 jQuery(function(){
     $("#search_btn").on('click', function(event){
         hideRandom();
@@ -8,7 +10,7 @@ jQuery(function(){
             url: "/api/search?q=" + $("#search_str").val(),
             type: "GET" 
         }).done(function(result) {
-            showResults(result);
+            showResults(result, "search_result");
         }).fail(function(err) {
             console.log(err);
         })
@@ -22,7 +24,7 @@ jQuery(function(){
             url: "/api/random",
             type: "GET" 
         }).done(function(result) {
-            showResults(result);
+            showResults(result, "search_result");
             changeRandomText();
         }).fail(function(err) {
             console.log(err);
@@ -31,16 +33,21 @@ jQuery(function(){
 
     $(window).on('shown.bs.modal', function() { 
         var id = $("div.modal.show").attr('id').split('_')[1];
-        // alert(id);
+        
         $.ajax({
             url: "/api/detail?id=" + id,
             type: "GET" 
         }).done(function(result) {
             showDetail(result, id);
+            initFavBtn(id);
         }).fail(function(err) {
             console.log(err);
         })
     });
+
+    $(window).on('hidden.bs.modal', updateFavPage);
+
+    updateFavPage();
 });
 
 let spinner = '<div class="spinner-border" role="status">    <span class="visually-hidden">Loading...</span>   </div>';
@@ -57,26 +64,28 @@ var showResultSpinner = function() {
 
 var currentPage = 1;
 var maxPage = 1;
-var showResults = function(result) {
-    var div = document.getElementById("search_result");
+var showResults = function(result, result_section_id) {
+    var div = document.getElementById(result_section_id);
     div.innerHTML = result;
 
-    setMaxPage();
-    setCurrentPage(1);
-    $(".pagination-button").on("click", function(event) {
-        var id = $(this).attr("id");
-        if($(this).hasClass("disable")) {
-            return;
-        }
-        if(id === "prev-button") {
-            setCurrentPage(-1+parseInt(currentPage));
-        } else if(id === "next-button") {
-            setCurrentPage(1+parseInt(currentPage));
-        } else {
-            var toPage = id.split('_')[1];
-            setCurrentPage(parseInt(toPage));
-        }
-    });
+    if(document.getElementById("pagination") != null) {
+        setMaxPage();
+        setCurrentPage(1);
+        $(".pagination-button").on("click", function(event) {
+            var id = $(this).attr("id");
+            if($(this).hasClass("disable")) {
+                return;
+            }
+            if(id === "prev-button") {
+                setCurrentPage(-1+parseInt(currentPage));
+            } else if(id === "next-button") {
+                setCurrentPage(1+parseInt(currentPage));
+            } else {
+                var toPage = id.split('_')[1];
+                setCurrentPage(parseInt(toPage));
+            }
+        });
+    }
 }
 
 var setMaxPage = function() {
@@ -86,7 +95,7 @@ var setMaxPage = function() {
 
 var setCurrentPage = function(page) {
     currentPage = page;
-    // console.log(currentPage);
+
     // show current page
     var divs = document.getElementsByClassName("pages");
     for(var i = 0; i < divs.length; i++) {
@@ -128,4 +137,105 @@ var changeRandomText = function() {
 var showDetail = function(result, id) {
     var div = document.getElementById("content"+id);
     div.innerHTML = result;
+}
+
+var initFavBtn = function(id) {
+    var fav = localStorage.getItem(localFav);
+    var favbtn = document.getElementById("fav_"+id);
+    if(fav != null) {
+        fav = JSON.parse(fav);
+        if(fav.idList.includes(id)) {
+            favbtn.classList.remove("bi-heart");
+            favbtn.classList.add("bi-heart-fill");
+        }
+    }
+
+    // setup fav btn
+    $(".fav-btn").on('click', function(event) {
+        if(favbtn.classList.contains("bi-heart-fill")) {
+            favbtn.classList.remove("bi-heart-fill");
+            favbtn.classList.add("bi-heart");
+            // remove from localstorage
+            removeFavRecipe(id);
+
+        } else {
+            favbtn.classList.remove("bi-heart");
+            favbtn.classList.add("bi-heart-fill");
+            // add to localstorage
+            addFavRecipe(id);
+        }
+    });
+}
+
+var addFavRecipe = function(id) {
+    var fav = localStorage.getItem(localFav);
+    if(fav == null) {
+        var favJson = {
+            "idList":[],
+            "meals":[]
+        };
+
+        localStorage.setItem(localFav, JSON.stringify(favJson));
+        fav = localStorage.getItem(localFav);
+    }
+
+    var parseFav = JSON.parse(fav);
+
+    var strMeal = document.getElementById("name_"+id).innerText;
+    var strMealThumb = document.getElementById("img_"+id).getAttribute("src");
+    var favItem = {
+        "strMeal": strMeal,
+        "strMealThumb": strMealThumb,
+        "idMeal": id
+    }
+    
+    parseFav.idList.push(id);
+    parseFav.meals.push(favItem);
+
+    var updateFav = JSON.stringify(parseFav);
+    // console.log(updateFav);
+
+    localStorage.setItem(localFav, updateFav);
+}
+
+var removeFavRecipe = function(id) {
+    var fav = localStorage.getItem(localFav);
+    var parseFav = JSON.parse(fav);
+    
+    parseFav.idList = parseFav.idList.filter(ele => ele !== id);
+    parseFav.meals = parseFav.meals.filter(item => item.idMeal !== id);
+
+    var updateFav = JSON.stringify(parseFav);
+    // console.log(updateFav);
+
+    localStorage.setItem(localFav, updateFav);
+}
+
+var updateFavPage = function() {
+    var fav = document.getElementById("fav_result");
+    if(fav != null){
+        var favJSON = localStorage.getItem(localFav);
+        console.log(favJSON);
+
+        if(favJSON == null) {
+            favJSON = {
+                'idList':[],
+                'meals':[]
+            };
+        } else {
+            favJSON = JSON.parse(favJSON);
+        }
+
+        var data = JSON.stringify(favJSON);
+        console.log(data);
+
+        $.ajax({
+            url: "/favData?data="+data,
+            type: "GET",
+        }).done(function(result) {
+            showResults(result, "fav_result");
+        }).fail(function(err){
+            console.log(err);
+        })
+    }
 }

@@ -8,6 +8,7 @@ require('dotenv').config()
 app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist/'));
 app.use('/bootstrap', express.static(__dirname + '/node_modules/bootstrap/dist/'));
 app.use('/',express.static(path.join(__dirname, "public")));
+app.use(express.json());
 app.set('view engine', 'ejs');
 
 // TheMealDB
@@ -75,49 +76,6 @@ let getCountryList = async () => {
   }
 }
 
-
-// Tasty API
-// let apiKey = {
-//   'X-RapidAPI-Key': process.env.API_KEY,
-//   'X-RapidAPI-Host': process.env.API_HOST
-// };
-// let getRecipesListByQuery = async (q) => {
-//   const qStr = q.split(' ').join('_');
-//   const options = {
-//     method: 'GET',
-//     url: 'https://tasty.p.rapidapi.com/recipes/list',
-//     params: {
-//       from:0,
-//       size:20,
-//       q:qStr
-//     },
-//     headers: apiKey
-//   };
-//   try {
-//     const response = await axios.request(options);
-//     return response.data;
-//   } catch (err) {
-//     console.log(err);
-//   }
-// }
-
-// let getRecipeDetail = async (id) => {
-//   const options = {
-//     method: 'GET',
-//     url: 'https://tasty.p.rapidapi.com/recipes/get-more-info',
-//     params: {
-//       id:id
-//     },
-//     headers: apiKey
-//   };
-//   try {
-// 	  const response = await axios.request(options);
-// 	  return response.data;
-//   } catch (error) {
-//     console.error(error);
-//   } 
-// }
-
 app.get(['/','/search'], (req, res) => {
   res.render('pages/index');
 });
@@ -151,5 +109,10 @@ app.get('/api/detail', async(req, res) => {
   let data = await getRecipeDetail(req.query.id);
   res.render('partials/detail', {"detail":data.meals[0]});
 });
+
+app.get('/favData', (req, res) => {
+  let data = JSON.parse(req.query.data);
+  res.render('partials/result', {"results": data.meals, "random": false});
+})
 
 module.exports = app;
