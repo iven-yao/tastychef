@@ -14,21 +14,39 @@ Let me know what you think :)
 
 # Features
 - Search by name:
-<img src="/demo/feature1_1.jpeg" width="400">
-<img src="/demo/feature1_2.jpeg" width="400">
-<img src="/demo/feature1_3.jpeg" width="400">
-
+<p float="left">
+  <img src="/demo/feature1_1.jpeg" width="400">
+  <img src="/demo/feature1_2.jpeg" width="400">
+</p>
+<p float="left">
+  <img src="/demo/feature1_3.jpeg" width="400">
+  <img src="/demo/feature1_4.jpeg" width="400">
+</p>
+<p float="left">
+  <img src="/demo/feature1_5.jpeg" width="400">
+</p>
 - Randomly pick one recipe:
-<img src="/demo/feature2_1.jpeg" width="400">
+<p float="left">
+  <img src="/demo/feature1_1.jpeg" width="400">
+  <img src="/demo/feature2_1.jpeg" width="400">
+</p>
 
 - Search by country:
-<img src="/demo/feature3_1.jpeg" width="400">
+<p float="left">
+  <img src="/demo/feature3_1.jpeg" width="400">
+  <img src="/demo/feature3_2.jpeg" width="400">
+</p>
 
 - Search by category:
-<img src="/demo/feature4_1.jpeg" width="400">
+<p float="left">
+  <img src="/demo/feature4_1.jpeg" width="400">
+  <img src="/demo/feature4_2.jpeg" width="400">
+</p>
 
 - Collect your favorite recipes:
-<img src="/demo/feature5_1.jpeg" width="400">
+<p float="left">
+  <img src="/demo/feature5_1.jpeg" width="400">
+</p>
 
 # useful links:
 - TheMealDB API https://www.themealdb.com/api.php
