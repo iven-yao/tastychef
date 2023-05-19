@@ -1,6 +1,9 @@
 # TastyChef
 recipe look up app powered by TheMealDB API
 
+# Demo
+https://github.com/iven-yao/tastychef/assets/25358966/a37d0f32-6aa9-4e96-862f-9e31f8ceffe7
+
 # Try Yourself
 - clone this repo `git clone https://github.com/iven-yao/tastychef.git`
 - install packages through `npm install package.json`
