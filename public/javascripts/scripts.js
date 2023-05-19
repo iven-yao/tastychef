@@ -46,7 +46,11 @@ jQuery(function(){
     $(window).on('shown.bs.modal', function() { 
         var id = $("div.modal.show").attr('id').split('_')[1];
         var content = $("#content"+id);
-        if(content.hasClass("rendered")) return;
+        if(content.hasClass("rendered")){
+            console.log("rendered");
+            return;
+        } 
+            
         
         $.ajax({
             url: "/api/detail?id=" + id,
@@ -214,6 +218,7 @@ var initFavBtn = function(id) {
     });
 }
 
+let favChanged = true;
 var addFavRecipe = function(id) {
     var fav = localStorage.getItem(localFav);
     if(fav == null) {
@@ -243,6 +248,7 @@ var addFavRecipe = function(id) {
     // console.log(updateFav);
 
     localStorage.setItem(localFav, updateFav);
+    favChanged = true;
 }
 
 var removeFavRecipe = function(id) {
@@ -256,33 +262,36 @@ var removeFavRecipe = function(id) {
     // console.log(updateFav);
 
     localStorage.setItem(localFav, updateFav);
+    favChanged = true;
 }
 
 var updateFavPage = function() {
-    var fav = document.getElementById("fav_result");
-    if(fav != null){
-        var favJSON = localStorage.getItem(localFav);
-        console.log(favJSON);
+    if(favChanged) {
+        favChanged = false;
+        var fav = document.getElementById("fav_result");
+        if(fav != null){
+            var favJSON = localStorage.getItem(localFav);
 
-        if(favJSON == null) {
-            favJSON = {
-                'idList':[],
-                'meals':[]
-            };
-        } else {
-            favJSON = JSON.parse(favJSON);
+            if(favJSON == null) {
+                favJSON = {
+                    'idList':[],
+                    'meals':[]
+                };
+            } else {
+                favJSON = JSON.parse(favJSON);
+            }
+
+            var data = JSON.stringify(favJSON);
+            data = encodeURIComponent(data);
+            console.log(data);
+            $.ajax({
+                url: "/favData?data="+data,
+                type: "GET",
+            }).done(function(result) {
+                showResults(result, "fav_result");
+            }).fail(function(err){
+                console.log(err);
+            })
         }
-
-        var data = JSON.stringify(favJSON);
-        console.log(data);
-
-        $.ajax({
-            url: "/favData?data="+data,
-            type: "GET",
-        }).done(function(result) {
-            showResults(result, "fav_result");
-        }).fail(function(err){
-            console.log(err);
-        })
     }
 }

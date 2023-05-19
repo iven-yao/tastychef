@@ -8,7 +8,6 @@ require('dotenv').config()
 app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist/'));
 app.use('/bootstrap', express.static(__dirname + '/node_modules/bootstrap/dist/'));
 app.use('/',express.static(path.join(__dirname, "public")));
-app.use(express.json());
 app.set('view engine', 'ejs');
 
 // TheMealDB
@@ -167,8 +166,10 @@ app.get('/api/cat', async(req, res) => {
   res.render('partials/result', {"results": data.meals, "random": false});
 });
 
+// send favData
 app.get('/favData', (req, res) => {
-  let data = JSON.parse(req.query.data);
+  let data = decodeURIComponent(req.query.data);
+  data = JSON.parse(data);
   res.render('partials/result', {"results": data.meals, "random": false});
 })
 
