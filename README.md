@@ -25,6 +25,7 @@ Let me know what you think :)
 <p float="left">
   <img src="/demo/feature1_5.jpeg" width="400">
 </p>
+
 - Randomly pick one recipe:
 <p float="left">
   <img src="/demo/feature1_1.jpeg" width="400">
