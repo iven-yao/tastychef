@@ -129,3 +129,7 @@ footer a:hover {
 #contact-section a {
     color: var(--main-text-color);
 }
+
+.pushback {
+    z-index: -1;
+}
