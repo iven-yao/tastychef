@@ -33,6 +33,8 @@ jQuery(function(){
 
     $(window).on('shown.bs.modal', function() { 
         var id = $("div.modal.show").attr('id').split('_')[1];
+        var content = $("#content"+id);
+        if(content.hasClass("rendered")) return;
         
         $.ajax({
             url: "/api/detail?id=" + id,
@@ -167,6 +169,7 @@ var changeRandomText = function() {
 var showDetail = function(result, id) {
     var div = document.getElementById("content"+id);
     div.innerHTML = result;
+    div.classList.add("rendered");
 }
 
 var initFavBtn = function(id) {

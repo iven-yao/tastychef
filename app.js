@@ -118,7 +118,7 @@ let init = () => {
 init();
 
 app.get(['/','/search'], (req, res) => {
-  res.render('pages/index');
+  res.render('pages/search');
 });
 
 app.get('/favorite', (req, res) => {
