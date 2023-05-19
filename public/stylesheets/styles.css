@@ -137,3 +137,8 @@ footer a:hover {
 .border-bottom {
     border-color: white;
 }
+
+.olive-btn.active {
+    background-color: var(--main-color);
+    color: white;
+}

@@ -1,6 +1,18 @@
 const localFav = "fav";
 
 jQuery(function(){
+
+    // for nav-link
+    var current = location.pathname;
+    $('#header-nav li a').each(function(){
+        var $this = $(this);
+        // if the current path is like this link, make it active
+        if(current === '/') current = '/search';
+        if($this.attr('href').indexOf(current) !== -1){
+            $this.addClass('active');
+        }
+    })
+
     $("#search_btn").on('click', function(event){
         hideRandom();
         showResultSpinner();
@@ -55,7 +67,8 @@ jQuery(function(){
     $(".area-btn").on('click', function(event) {
         showResultSpinner();
         var area = $(this).attr('id');
-
+        $(".area-btn").removeClass("active");
+        $(this).addClass("active");
         $.ajax({
             url: "/api/area?a="+area,
             type: "GET"
@@ -70,7 +83,8 @@ jQuery(function(){
     $(".cate-btn").on('click', function(event) {
         showResultSpinner();
         var cat = $(this).attr('id');
-
+        $(".cate-btn").removeClass("active");
+        $(this).addClass("active");
         $.ajax({
             url: "/api/cat?c="+cat,
             type: "GET"
