@@ -5,8 +5,6 @@ let url = require('url');
 let app = express();
 require('dotenv').config()
 
-const PORT = process.env.PORT;
-app.listen(PORT, () => console.log(`App listening on port ${PORT}!`));
 app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist/'));
 app.use('/bootstrap', express.static(__dirname + '/node_modules/bootstrap/dist/'));
 app.use('/',express.static(path.join(__dirname, "public")));
@@ -124,13 +122,17 @@ app.get(['/','/search'], (req, res) => {
   res.render('pages/index');
 });
 
-app.get('/category', (req, res) => {
-  res.render('pages/category');
+app.get('/favorite', (req, res) => {
+  res.render('pages/favorite');
 });
 
 app.get('/country', (req, res) => {
   res.render('pages/country');
 });
+
+app.get('/about', (req, res) => {
+  res.render('pages/about');
+})
 
 // get recipes
 app.get('/api/search', async (req, res) => {
@@ -149,3 +151,5 @@ app.get('/api/detail', async(req, res) => {
   let data = await getRecipeDetail(req.query.id);
   res.render('partials/detail', {"detail":data.meals[0]});
 });
+
+module.exports = app;
