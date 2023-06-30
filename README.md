@@ -35,13 +35,13 @@ Let me know what you think :)
   <img src="/demo/feature2_1.jpeg" width="400">
 </p>
 
-- Search by country:
+- Filter by country:
 <p float="left">
   <img src="/demo/feature3_1.jpeg" width="400">
   <img src="/demo/feature3_2.jpeg" width="400">
 </p>
 
-- Search by category:
+- Filter by category:
 <p float="left">
   <img src="/demo/feature4_1.jpeg" width="400">
   <img src="/demo/feature4_2.jpeg" width="400">
