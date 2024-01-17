@@ -7,11 +7,8 @@ https://github.com/iven-yao/tastychef/assets/25358966/a37d0f32-6aa9-4e96-862f-9e
 # Try Yourself
 - clone this repo `git clone https://github.com/iven-yao/tastychef.git`
 - install packages through `npm install package.json`
-- add an .env file to the root directory
-- inside the .env file add following:
-  - PORT: {PORT} // the port number this app should listen to
 - run the application `node app.js`
-- try in your browser with http://localhost:{PORT}
+- try in your browser with http://localhost:3000
 
 Let me know what you think :)
 
